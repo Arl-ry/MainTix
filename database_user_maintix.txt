@@ -1,0 +1,15 @@
+database name: maintix
+
+CREATE TABLE `user_info` (
+  `employee_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `first_name` varchar(20) NOT NULL,
+  `last_name` varchar(20) NOT NULL,
+  `tin_no` varchar(11) NOT NULL,
+  `department` enum('CITE','CEA') NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `user_type` enum('requester','admin') NOT NULL DEFAULT 'requester',
+  `user_status` enum('active','inactive') NOT NULL DEFAULT 'active',
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `tin_no` (`tin_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
