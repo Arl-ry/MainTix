@@ -13,3 +13,21 @@ CREATE TABLE `user_info` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `tin_no` (`tin_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `ticket` (
+  `ticket_id` INT AUTO_INCREMENT PRIMARY KEY,
+  `employee_id` int(11) NOT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `lab_room` enum('ITS 200','ITS 201','MAC LAB','PTC 303','PTC 304','PTC 305','PTC 306') NOT NULL,
+  `priority` enum('low','normal','high','urgent') NOT NULL DEFAULT 'normal',
+  `description` text DEFAULT NULL,
+  `attachment_filename` varchar(255) DEFAULT NULL,
+  `attachment_path` varchar(500) DEFAULT NULL,
+  `status` varchar(255) NOT NULL DEFAULT 'pending',
+  `date_submitted` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_resolved` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE ticket ADD COLUMN date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+ALTER TABLE ticket ADD COLUMN notification_read TINYINT(1) DEFAULT 0;
